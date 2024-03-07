@@ -2,12 +2,11 @@ import { program } from 'commander';
 import Table from 'cli-table3';
 import chalk from 'chalk';
 import prompts from 'prompts';
-
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import download from 'download-git-repo';
+import ora from 'ora';
 
 import { TEMPLATES } from './config';
-import { makeDir, removeDir, copyFiles } from './utils';
+import { makeDir, removeDir, replaceTemplateText } from './utils';
 import { name, version, description } from '../package.json';
 
 program.name(name).description(description).version(version);
@@ -27,13 +26,13 @@ program.option('-l, --list', 'Show all currently available templates.').action((
 
 /** 创建next.js项目: create-next yourProjectName -t templateName */
 program
-  .command('create-next <project-name>')
+  .command('create-next [project-name]')
   .description('Create a next.js project.')
   .option(
     '-t, --template <template-name>',
     'Please enter template name.',
   )
-  .action(async (projectName, options) => {
+  .action(async (projectName = 'my-app', options) => {
     const { myName } = await prompts([
       {
         type: 'text',
@@ -67,11 +66,17 @@ program
           inactive: 'no',
         },
       ]);
-      if (isAppRouter) {
-        // TODO
-      } else {
-        // TODO
-      }
+      const spinner = ora('Downloading repository...').start(); // 开始loading
+      download(`github:yyd1142/${isAppRouter ? 'next-app-router' : 'next-page-router'}-template`, projectDir, (error: any) => {
+        if (error) {
+          spinner.fail('Download failed');
+          removeDir(projectDir);
+        } else {
+          spinner.succeed('Download completed');
+          // 替换package.json里的name为项目名称
+          replaceTemplateText(`${projectDir}/package.json.hbs`, { projectName: myName });
+        }
+      });
     }
   });
 

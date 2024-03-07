@@ -1,6 +1,7 @@
 import path from 'node:path';
 import fs from 'node:fs';
 import util from 'node:util';
+import handlebars from 'handlebars';
 
 const readdir = util.promisify(fs.readdir);
 const stat = util.promisify(fs.stat);
@@ -64,4 +65,26 @@ export const removeDir = (srcDir: string) => {
       console.error('Directory and all its contents have been deleted.');
     }
   });
+};
+
+
+/** 使用handlebars替换占位字符串为project name */
+export const replaceTemplateText = (filePath: string, params: ReplaceTemplateParams) => {
+  // 读取 *.hbs 模版文件的内容
+  const templateContent = fs.readFileSync(filePath, 'utf8');
+
+  // 使用 Handlebars 编译模版
+  const compiledTemplate = handlebars.compile(templateContent);
+
+  // 替换占位字符串为 projectName
+  const replacedContent = compiledTemplate(params);
+  const newFilePath = filePath.split('.hbs')[0];
+
+  // 删除原始的 *.hbs 文件
+  fs.unlinkSync(filePath);
+
+  // 将替换后的内容写入新文件
+  if (newFilePath) fs.writeFileSync(newFilePath, replacedContent);
+
+
 };

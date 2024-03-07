@@ -1,1 +1,5 @@
-interface Templates { [key: string]: string }
+interface Templates { 
+  [key: string]: string
+};
+
+interface ReplaceTemplateParams extends Templates {};

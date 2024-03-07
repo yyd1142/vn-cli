@@ -1,1 +1,1 @@
-export { makeDir, removeDir, copyFiles } from './fs';
+export { makeDir, removeDir, copyFiles, replaceTemplateText } from './fs';
