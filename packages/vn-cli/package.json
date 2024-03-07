@@ -1,0 +1,35 @@
+{
+  "name": "vn-cli",
+  "version": "1.0.0",
+  "description": "vn-cli is a scaffolding that supports building vite or next.js project",
+  "type": "module",
+  "scripts": {
+    "dev": "unbuild --stub",
+    "build": "unbuild"
+  },
+  "bin": {
+    "vn-cli": "index.js"
+  },
+  "files": [
+    "index.js",
+    "dist/*"
+  ],
+  "author": "Yuyingde",
+  "license": "ISC",
+  "devDependencies": {
+    "@repo/eslint-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
+    "@types/prompts": "^2.4.9"
+  },
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "cli-table3": "^0.6.3",
+    "commander": "^12.0.0",
+    "prompts": "^2.4.2",
+    "unbuild": "^2.0.0"
+  },
+  "packageManager": "pnpm@8.9.0",
+  "engines": {
+    "node": ">=18"
+  }
+}

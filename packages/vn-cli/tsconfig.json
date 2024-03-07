@@ -1,0 +1,4 @@
+{
+  "include": ["build.config.ts", "src"],
+  "extends": "@repo/typescript-config/base.json"
+}

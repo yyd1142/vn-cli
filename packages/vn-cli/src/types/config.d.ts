@@ -1,0 +1,1 @@
+interface Templates { [key: string]: string }
