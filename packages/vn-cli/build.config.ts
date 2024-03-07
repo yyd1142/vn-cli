@@ -1,4 +1,5 @@
 import { defineBuildConfig } from 'unbuild';
+import path from 'node:path';
 
 export default defineBuildConfig({
   entries: ['src/index'],
@@ -7,7 +8,10 @@ export default defineBuildConfig({
     inlineDependencies: true,
     esbuild: {
       target: 'node18',
-      minify: true,
+      minify: false,
     },
   },
+  alias: {		
+    '@': path.resolve(__dirname, './src')
+},
 });

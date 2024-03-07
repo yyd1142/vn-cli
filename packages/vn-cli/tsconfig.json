@@ -1,4 +1,10 @@
 {
   "include": ["build.config.ts", "src"],
-  "extends": "@repo/typescript-config/base.json"
+  "extends": "@repo/typescript-config/base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  }
 }
