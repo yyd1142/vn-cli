@@ -1,9 +1,6 @@
-[submodule "apps/next-app-router-template"]
-	path = apps/next-app-router-template
-	url = https://github.com/yyd1142/next-app-router-template.git
-[submodule "apps/next-page-router-template"]
-	path = apps/next-page-router-template
-	url = https://github.com/yyd1142/next-page-router-template.git
 [submodule "apps/vite-react-template"]
 	path = apps/vite-react-template
 	url = https://github.com/yyd1142/vite-react-template.git
+[submodule "apps/next-template"]
+	path = apps/next-template
+	url = https://github.com/yyd1142/next-template.git
